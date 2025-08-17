@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Success</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-image: url("{% static 'clouds.jpg' %}");
+            background-size: 200% 200%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            animation: animateBg 15s ease infinite, fadeIn 1s ease-out forwards;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @keyframes animateBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        button {
+            background-color:rgb(17, 20, 23);
+            color: white;
+            margin: 8px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 70%;
+            font-size: 16px;
+        }
+    </style>
+</head>
+    
+<body class="flex">
+    <div class="text-center">
+        <h1 class="text-4xl font-bold text-white mb-8">Success!</h1>
+        <p class="text-lg text-white mb-8">File uploaded successfully.</p>
+        <a href="{% url 'dashboard' %}" class="bg-blue-500 text-white p-4 rounded-lg text-xl hover:bg-blue-600 transition duration-300">Back to Dashboard</a>
+    </div>
+</body>
+</html>

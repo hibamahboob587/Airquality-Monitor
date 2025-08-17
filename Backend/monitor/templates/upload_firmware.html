@@ -1,0 +1,117 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Firmware Upload</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-image: url("{% static 'clouds.jpg' %}");
+            background-size: 200% 200%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            animation: animateBg 15s ease infinite, fadeIn 1s ease-out forwards;
+            padding-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+        @keyframes animateBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            color: #F3F3E0;
+            margin-bottom: 20px;
+        }
+        .glass-card {
+            background: rgba(18, 12, 47, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .glass-card:hover {
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+        form p {
+            margin-bottom: 15px;
+        }
+
+        input[type="file"],
+        input[type="text"] {
+        margin: 15px 0;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background: #fff;
+        color: #000;
+        width: 100%;
+    }
+        
+
+        button {
+            background-color: #007bff;
+            color: white;
+            margin: 8px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 70%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload New Firmware</h1>
+    <div class="glass-card">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        
+            <div class="mb-5">
+                
+                <div class="flex items-center space-x-4">
+                    <label for="id_file" class="cursor-pointer bg-gray-700 text-black px-4 py-2 rounded shadow hover:bg-sky-800 transition duration-150">
+                        <i class="fas fa-upload mr-2"></i>Choose File
+                    </label>
+                    <span id="file-name" class="text-white text-sm">No file chosen</span>
+                </div>
+                <input id="id_file" name="file" type="file" class="hidden" onchange="updateFileName(this)">
+            </div>
+        
+            <div class="button-container mt-5">
+                <button type="submit">Upload</button>
+                <a href="{% url 'dashboard' %}" class="button text-center inline-block text-white bg-gray-600 hover:bg-gray-700 rounded py-2 px-4">Back</a>
+            </div>
+        </form>
+        
+    </div>
+    <script>
+        function updateFileName(input) {
+            const fileName = input.files[0]?.name || 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        }
+    </script>
+    
+</body>
+</html>
